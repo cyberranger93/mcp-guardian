@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { loadConfig, sampleConfig } from "./config.js";
 import { evaluatePolicy } from "./policy.js";
 import { redactValue } from "./redact.js";
@@ -16,8 +17,8 @@ interface ParsedArgs {
 
 const VERSION = "0.1.0";
 
-async function main(): Promise<void> {
-  const parsed = parseArgs(process.argv.slice(2));
+export async function main(argv = process.argv.slice(2)): Promise<void> {
+  const parsed = parseArgs(argv);
 
   if (!parsed.command || parsed.flags.help === true || parsed.flags.h === true) {
     printHelp();
@@ -139,14 +140,16 @@ function redactCommand(parsed: ParsedArgs): void {
   process.stdout.write(`${JSON.stringify(redactValue(input))}\n`);
 }
 
-function parseArgs(args: string[]): ParsedArgs {
+export function parseArgs(args: string[]): ParsedArgs {
+  const firstArg = args[0];
   const result: ParsedArgs = {
-    command: args[0],
+    command: firstArg && !firstArg.startsWith("-") ? firstArg : undefined,
     positionals: [],
     flags: {}
   };
 
-  for (let index = 1; index < args.length; index += 1) {
+  const startIndex = result.command ? 1 : 0;
+  for (let index = startIndex; index < args.length; index += 1) {
     const arg = args[index];
     if (!arg) {
       continue;
@@ -227,7 +230,19 @@ function fail(message: string): never {
   process.exit(1);
 }
 
-main().catch((error) => {
-  process.stderr.write(`mcp-guardian: ${error instanceof Error ? error.message : String(error)}\n`);
-  process.exit(1);
-});
+if (isCliEntrypoint()) {
+  main().catch((error) => {
+    process.stderr.write(`mcp-guardian: ${error instanceof Error ? error.message : String(error)}\n`);
+    process.exit(1);
+  });
+}
+
+function isCliEntrypoint(): boolean {
+  const invokedPath = process.argv[1];
+  if (!invokedPath) {
+    return false;
+  }
+
+  const currentPath = fileURLToPath(import.meta.url);
+  return import.meta.url === pathToFileURL(resolve(invokedPath)).href || basename(currentPath) === basename(invokedPath);
+}
