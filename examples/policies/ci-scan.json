@@ -1,0 +1,78 @@
+{
+  "version": "0.1",
+  "mode": "enforce",
+  "audit": {
+    "enabled": false,
+    "path": ".mcp-guardian/audit.jsonl",
+    "includeArguments": false,
+    "redact": true
+  },
+  "redaction": {
+    "enabled": true,
+    "redactResponses": true
+  },
+  "tools": {
+    "allow": [],
+    "deny": [
+      "shell",
+      "exec",
+      "dangerously_*",
+      "*unsafe*"
+    ],
+    "warn": [
+      "browser_*",
+      "http_*"
+    ]
+  },
+  "rules": {
+    "shell": {
+      "blockDangerousCommands": true,
+      "denyPatterns": [
+        "curl.+\\|\\s*(sh|bash|pwsh|powershell)",
+        "Invoke-WebRequest.+\\|",
+        "git\\s+reset\\s+--hard",
+        "rm\\s+-rf\\s+(/|\\*)"
+      ],
+      "warnPatterns": [
+        "npm\\s+install",
+        "pip\\s+install",
+        "docker\\s+run"
+      ]
+    },
+    "filesystem": {
+      "blockSensitiveReads": true,
+      "denyPaths": [
+        ".env",
+        ".aws/credentials",
+        ".ssh/id_rsa",
+        ".ssh/id_ed25519"
+      ],
+      "warnOnAbsolutePaths": true
+    },
+    "network": {
+      "denyHosts": [
+        "169.254.169.254",
+        "metadata.google.internal"
+      ],
+      "warnHosts": [
+        "pastebin.com",
+        "webhook.site"
+      ]
+    },
+    "secrets": {
+      "blockOnSecret": true
+    }
+  },
+  "scanner": {
+    "maxFileSizeBytes": 1000000,
+    "exclude": [
+      ".git",
+      "node_modules",
+      "dist",
+      "coverage",
+      ".next",
+      ".turbo",
+      ".mcp-guardian"
+    ]
+  }
+}

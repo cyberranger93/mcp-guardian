@@ -1,0 +1,52 @@
+{
+  "name": "mcp-guardian",
+  "version": "0.1.0",
+  "description": "A local security firewall, scanner, and audit layer for Model Context Protocol servers.",
+  "type": "module",
+  "homepage": "https://github.com/cyberranger93/mcp-guardian#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberranger93/mcp-guardian.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyberranger93/mcp-guardian/issues"
+  },
+  "bin": {
+    "mcp-guardian": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "action.yml",
+    "examples"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "check": "npm run build && npm run test",
+    "scan:self": "node dist/cli.js scan . --fail-on critical"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "ai-agents",
+    "agent-security",
+    "secret-scanning",
+    "mcp-server",
+    "developer-tools"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}

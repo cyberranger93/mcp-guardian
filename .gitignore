@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+.mcp-guardian/
+guardian-report.html
+*.log
+.env
+.env.*
+!.env.example
+npm-debug.log*

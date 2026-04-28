@@ -1,0 +1,60 @@
+{
+  "version": "0.1",
+  "mode": "monitor",
+  "audit": {
+    "enabled": true,
+    "path": ".mcp-guardian/audit.jsonl",
+    "includeArguments": true,
+    "redact": true
+  },
+  "redaction": {
+    "enabled": true,
+    "redactResponses": true
+  },
+  "tools": {
+    "allow": [],
+    "deny": [],
+    "warn": [
+      "shell",
+      "exec",
+      "browser_*",
+      "http_*",
+      "*unsafe*"
+    ]
+  },
+  "rules": {
+    "shell": {
+      "blockDangerousCommands": true,
+      "denyPatterns": [
+        "curl.+\\|\\s*(sh|bash|pwsh|powershell)",
+        "git\\s+reset\\s+--hard",
+        "rm\\s+-rf\\s+(/|\\*)"
+      ],
+      "warnPatterns": [
+        "npm\\s+install",
+        "pip\\s+install",
+        "docker\\s+run"
+      ]
+    },
+    "filesystem": {
+      "blockSensitiveReads": true,
+      "denyPaths": [
+        ".env",
+        ".aws/credentials",
+        ".ssh/id_rsa",
+        ".ssh/id_ed25519"
+      ],
+      "warnOnAbsolutePaths": true
+    },
+    "network": {
+      "denyHosts": [],
+      "warnHosts": [
+        "pastebin.com",
+        "webhook.site"
+      ]
+    },
+    "secrets": {
+      "blockOnSecret": false
+    }
+  }
+}

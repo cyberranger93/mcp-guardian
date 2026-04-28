@@ -1,0 +1,47 @@
+name: "MCP Guardian"
+description: "Scan MCP server configs, agent tool policies, and secret-bearing MCP risk in CI."
+author: "MCP Guardian"
+
+inputs:
+  path:
+    description: "Path to scan."
+    required: false
+    default: "."
+  config:
+    description: "Optional MCP Guardian policy file."
+    required: false
+    default: ""
+  fail-on:
+    description: "Minimum severity that fails the job: info, low, medium, high, or critical."
+    required: false
+    default: "high"
+  format:
+    description: "Output format: github, text, json, or sarif."
+    required: false
+    default: "github"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install MCP Guardian action dependencies
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npm ci
+
+    - name: Build MCP Guardian
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: npm run build
+
+    - name: Run MCP Guardian scan
+      shell: bash
+      run: |
+        args=("scan" "${{ inputs.path }}" "--fail-on" "${{ inputs.fail-on }}" "--format" "${{ inputs.format }}")
+        if [ -n "${{ inputs.config }}" ]; then
+          args+=("--config" "${{ inputs.config }}")
+        fi
+        node "${{ github.action_path }}/dist/cli.js" "${args[@]}"
+
+branding:
+  icon: "shield"
+  color: "blue"

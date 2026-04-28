@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "filesystem-guarded": {
+      "command": "mcp-guardian",
+      "args": [
+        "proxy",
+        "--config",
+        ".mcp-guardian.json",
+        "--",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ]
+    }
+  }
+}
