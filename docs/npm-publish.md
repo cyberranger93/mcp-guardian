@@ -3,7 +3,7 @@
 The unscoped `mcp-guardian` package name is already used on npm, so this project publishes as:
 
 ```text
-@cyberranger93/mcp-guardian
+@cyberranger/mcp-guardian
 ```
 
 The CLI binary remains:
@@ -38,8 +38,8 @@ npm publish --access public
 ## Verify Public Install
 
 ```bash
-npm view @cyberranger93/mcp-guardian version
-npm install -g @cyberranger93/mcp-guardian
+npm view @cyberranger/mcp-guardian version
+npm install -g @cyberranger/mcp-guardian
 mcp-guardian --help
 ```
 

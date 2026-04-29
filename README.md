@@ -47,7 +47,7 @@ From GitHub:
 npm install -g github:cyberranger93/mcp-guardian
 ```
 
-The package is prepared for npm publication as `@cyberranger93/mcp-guardian`; see [docs/npm-publish.md](docs/npm-publish.md).
+The package is prepared for npm publication as `@cyberranger/mcp-guardian`; see [docs/npm-publish.md](docs/npm-publish.md).
 
 For local development in this repository:
 

@@ -4,6 +4,13 @@ All notable changes to MCP Guardian will be documented in this file.
 
 This project follows semantic versioning before 1.0 with the usual pre-1.0 caveat: minor versions may include breaking changes as the CLI and policy format stabilize.
 
+## [0.1.3] - 2026-04-29
+
+### Changed
+
+- Switched npm publication target to the authenticated npm user scope `@cyberranger/mcp-guardian`.
+- Kept GitHub repository and GitHub Action usage under `cyberranger93/mcp-guardian`.
+
 ## [0.1.2] - 2026-04-29
 
 ### Changed

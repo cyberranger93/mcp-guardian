@@ -15,7 +15,7 @@ interface ParsedArgs {
   flags: Record<string, string | boolean>;
 }
 
-export const VERSION = "0.1.2";
+export const VERSION = "0.1.3";
 
 export async function main(argv = process.argv.slice(2)): Promise<void> {
   const parsed = parseArgs(argv);
