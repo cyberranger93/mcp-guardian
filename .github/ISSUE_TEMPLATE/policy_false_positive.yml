@@ -1,0 +1,28 @@
+name: Policy False Positive
+description: Report a tool call or config that Guardian blocks too aggressively.
+title: "[Policy false positive]: "
+labels:
+  - policy
+  - false-positive
+body:
+  - type: textarea
+    id: blocked
+    attributes:
+      label: Blocked Input
+      description: Paste a minimal redacted tool call, command, or config snippet.
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Guardian Decision
+      description: Paste the block decision or scanner finding.
+    validations:
+      required: true
+  - type: textarea
+    id: why_safe
+    attributes:
+      label: Why This Should Be Allowed
+      description: Explain the legitimate workflow and expected policy behavior.
+    validations:
+      required: true

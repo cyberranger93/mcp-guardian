@@ -13,7 +13,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       - name: Scan MCP server risk
         uses: cyberranger93/mcp-guardian@v0

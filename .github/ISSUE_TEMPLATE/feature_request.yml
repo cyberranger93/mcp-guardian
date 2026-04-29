@@ -1,0 +1,33 @@
+name: Feature Request
+description: Suggest a focused improvement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What MCP workflow or security gap should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - proxy
+        - policy
+        - scanner
+        - redaction
+        - audit logs
+        - GitHub Action
+        - docs
+    validations:
+      required: true

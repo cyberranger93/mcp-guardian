@@ -4,6 +4,16 @@ All notable changes to MCP Guardian will be documented in this file.
 
 This project follows semantic versioning before 1.0 with the usual pre-1.0 caveat: minor versions may include breaking changes as the CLI and policy format stabilize.
 
+## [0.1.1] - 2026-04-29
+
+### Changed
+
+- Added launch playbook, social copy, and channel-specific outreach guidance.
+- Added README badges and a short block-decision demo above the fold.
+- Added GitHub issue templates and pull request template for contributor flow.
+- Included docs, changelog, and security policy in packaged release contents.
+- Updated public install docs to use the GitHub install path before npm publication.
+
 ## [0.1.0] - 2026-04-28
 
 ### Added

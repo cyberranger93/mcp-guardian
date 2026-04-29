@@ -16,7 +16,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
       - uses: cyberranger93/mcp-guardian@v0
         with:
           path: .
@@ -62,7 +62,7 @@ strategy:
       - packages/browser-mcp
 
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v6.0.2
   - uses: cyberranger93/mcp-guardian@v0
     with:
       path: ${{ matrix.package }}

