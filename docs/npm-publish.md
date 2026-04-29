@@ -12,13 +12,27 @@ The CLI binary remains:
 mcp-guardian
 ```
 
-## One-Time Login
+## Publishing Options
+
+### Trusted Publishing
+
+Preferred path: configure npm trusted publishing for:
+
+- Package: `@cyberranger/mcp-guardian`
+- GitHub owner: `cyberranger93`
+- Repository: `mcp-guardian`
+- Workflow filename: `npm-publish.yml`
+- Environment: leave blank unless the GitHub workflow is later changed to use one
+
+Then run the `Publish Package to npm` GitHub Actions workflow.
+
+### Manual Login
 
 ```bash
 npm login
 ```
 
-Use an npm account that can publish under the `@cyberranger93` scope.
+Use an npm account that can publish under the `@cyberranger` scope. Manual `npm publish` requires npm publish-grade 2FA or a granular access token with publish permissions.
 
 ## Verify Before Publishing
 
