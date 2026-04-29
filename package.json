@@ -26,6 +26,8 @@
     "dev": "tsx src/cli.ts",
     "test": "vitest run",
     "check": "npm run build && npm run test",
+    "prepare": "npm run build",
+    "prepack": "npm run build",
     "scan:self": "node dist/cli.js scan . --fail-on critical"
   },
   "keywords": [
@@ -38,7 +40,7 @@
     "mcp-server",
     "developer-tools"
   ],
-  "author": "",
+  "author": "cyberranger93",
   "license": "MIT",
   "engines": {
     "node": ">=20.11"

@@ -44,7 +44,7 @@ It also includes a repository scanner and GitHub Action so teams can catch risky
 Start in monitor mode, review what your agents actually call, then switch to enforce mode when the policy is ready.
 
 ```bash
-npm install -g mcp-guardian
+npm install -g github:cyberranger93/mcp-guardian
 mcp-guardian scan . --fail-on high
 mcp-guardian proxy -- npx -y your-mcp-server
 ```

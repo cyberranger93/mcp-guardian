@@ -9,7 +9,7 @@ Goal: show Guardian blocking a destructive or suspicious MCP tool call before it
 Setup:
 
 ```bash
-npm install -g mcp-guardian
+npm install -g github:cyberranger93/mcp-guardian
 mcp-guardian init
 ```
 
