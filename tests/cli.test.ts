@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { parseArgs } from "../src/cli.js";
+import { readFileSync } from "node:fs";
+import { parseArgs, VERSION } from "../src/cli.js";
 
 describe("CLI argument parsing", () => {
+  it("keeps the CLI version aligned with package.json", () => {
+    const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as { version: string };
+
+    expect(VERSION).toBe(packageJson.version);
+  });
+
   it("treats global --help as a flag instead of an unknown command", () => {
     expect(parseArgs(["--help"])).toEqual({
       command: undefined,

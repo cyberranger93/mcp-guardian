@@ -41,11 +41,13 @@ MCP Guardian gives developers a local control point:
 
 ## Install
 
+From GitHub:
+
 ```bash
 npm install -g github:cyberranger93/mcp-guardian
 ```
 
-The npm package name is reserved in `package.json`; publish to npm when you want the shorter `npm install -g mcp-guardian` path.
+The package is prepared for npm publication as `@cyberranger93/mcp-guardian`; see [docs/npm-publish.md](docs/npm-publish.md).
 
 For local development in this repository:
 

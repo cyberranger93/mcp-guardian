@@ -1,6 +1,6 @@
 {
-  "name": "mcp-guardian",
-  "version": "0.1.1",
+  "name": "@cyberranger93/mcp-guardian",
+  "version": "0.1.2",
   "description": "A local security firewall, scanner, and audit layer for Model Context Protocol servers.",
   "type": "module",
   "homepage": "https://github.com/cyberranger93/mcp-guardian#readme",
@@ -45,6 +45,9 @@
   ],
   "author": "cyberranger93",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20.11"
   },

@@ -4,6 +4,14 @@ All notable changes to MCP Guardian will be documented in this file.
 
 This project follows semantic versioning before 1.0 with the usual pre-1.0 caveat: minor versions may include breaking changes as the CLI and policy format stabilize.
 
+## [0.1.2] - 2026-04-29
+
+### Changed
+
+- Prepared npm publication under the available scoped package name `@cyberranger93/mcp-guardian`.
+- Kept the executable binary name as `mcp-guardian`.
+- Added npm publishing documentation while keeping GitHub install as the live public install path.
+
 ## [0.1.1] - 2026-04-29
 
 ### Changed

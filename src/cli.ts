@@ -15,18 +15,18 @@ interface ParsedArgs {
   flags: Record<string, string | boolean>;
 }
 
-const VERSION = "0.1.0";
+export const VERSION = "0.1.2";
 
 export async function main(argv = process.argv.slice(2)): Promise<void> {
   const parsed = parseArgs(argv);
 
-  if (!parsed.command || parsed.flags.help === true || parsed.flags.h === true) {
-    printHelp();
+  if (parsed.flags.version === true || parsed.flags.v === true) {
+    process.stdout.write(`${VERSION}\n`);
     return;
   }
 
-  if (parsed.flags.version === true || parsed.flags.v === true) {
-    process.stdout.write(`${VERSION}\n`);
+  if (!parsed.command || parsed.flags.help === true || parsed.flags.h === true) {
+    printHelp();
     return;
   }
 
