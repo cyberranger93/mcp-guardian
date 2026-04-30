@@ -49,6 +49,8 @@ npm pack --dry-run
 npm publish --access public
 ```
 
+If npm uses passkey/PIN auth instead of an authenticator app, complete the browser challenge and use the generated one-time token when prompted by the CLI.
+
 ## Verify Public Install
 
 ```bash

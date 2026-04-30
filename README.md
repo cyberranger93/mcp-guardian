@@ -41,13 +41,17 @@ MCP Guardian gives developers a local control point:
 
 ## Install
 
-From GitHub:
+From npm:
 
 ```bash
-npm install -g github:cyberranger93/mcp-guardian
+npm install -g @cyberranger/mcp-guardian
 ```
 
-The package is prepared for npm publication as `@cyberranger/mcp-guardian`; see [docs/npm-publish.md](docs/npm-publish.md).
+Or run without installing:
+
+```bash
+npm exec --package=@cyberranger/mcp-guardian -- mcp-guardian --help
+```
 
 For local development in this repository:
 
