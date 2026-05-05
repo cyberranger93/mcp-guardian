@@ -3,13 +3,30 @@
   "version": "0.1.0",
   "description": "MCP server scanner, runtime firewall, and CI guardrail for AI agents",
   "type": "module",
+  "main": "./dist/types.js",
+  "types": "./dist/types.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./firewall": {
+      "import": "./dist/firewall/index.js",
+      "types": "./dist/firewall/index.d.ts"
+    },
+    "./scanner": {
+      "import": "./dist/scanner/index.js",
+      "types": "./dist/scanner/index.d.ts"
+    }
+  },
   "bin": {
     "mcp-guardian": "./dist/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "start": "node dist/cli/index.js"
+    "start": "node dist/cli/index.js",
+    "test": "node --test dist/**/*.test.js"
   },
   "keywords": [
     "mcp",
