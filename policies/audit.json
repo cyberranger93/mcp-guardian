@@ -1,0 +1,6 @@
+{
+  "name": "audit",
+  "description": "Audit-only policy. All rule matches are logged but never blocked. Use during onboarding or for monitoring-only deployments.",
+  "defaultMode": "audit",
+  "rules": []
+}

@@ -1,0 +1,6 @@
+{
+  "name": "strict",
+  "description": "Deny-by-default policy. All critical and high severity rules are enforced. Zero tolerance for known-bad patterns.",
+  "defaultMode": "deny",
+  "rules": []
+}

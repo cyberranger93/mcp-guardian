@@ -1,0 +1,22 @@
+{
+  "name": "standard",
+  "description": "Standard policy. Blocks critical and high severity matches. Audits (logs but allows) medium and low severity matches.",
+  "defaultMode": "deny",
+  "rules": [
+    {
+      "ruleId": "FW-006",
+      "action": "downgrade",
+      "_comment": "Rate limit: downgrade to audit-only in standard mode to avoid blocking legitimate bursts"
+    },
+    {
+      "ruleId": "FW-009",
+      "action": "downgrade",
+      "_comment": "Non-HTTPS: audit-only in standard mode (legacy internal HTTP may be acceptable)"
+    },
+    {
+      "ruleId": "FW-014",
+      "action": "downgrade",
+      "_comment": "Oversized args: audit-only in standard mode (some RAG workflows legitimately pass large docs)"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-typecheck:
+    name: Build & Typecheck
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+  scan-example:
+    name: Scan Example MCP Server (CI Guardrail Demo)
+    runs-on: ubuntu-latest
+    needs: build-and-typecheck
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Scan example server manifest (fail on high)
+        run: |
+          node dist/cli/index.js scan examples/safe-server.json \
+            --output table \
+            --policy standard \
+            --fail-on high \
+            --save /tmp/scan-result.json
+        continue-on-error: true
+
+      - name: Upload scan result as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: scan-result
+          path: /tmp/scan-result.json
+        if: always()
+
+  sarif-upload:
+    name: SARIF Upload (GitHub Code Scanning)
+    runs-on: ubuntu-latest
+    needs: build-and-typecheck
+    permissions:
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Generate SARIF report
+        run: |
+          mkdir -p sarif-reports
+          node dist/cli/index.js scan examples/safe-server.json \
+            --output sarif \
+            --policy standard \
+            --fail-on critical \
+            > sarif-reports/mcp-guardian.sarif
+        continue-on-error: true
+
+      - name: Upload SARIF to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: sarif-reports/mcp-guardian.sarif
+          category: mcp-guardian
+        if: always()
+        continue-on-error: true

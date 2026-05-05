@@ -1,0 +1,57 @@
+{
+  "name": "my-safe-mcp-server",
+  "version": "1.2.0",
+  "description": "A well-configured MCP server for reading and summarizing documents.",
+  "auth": {
+    "required": true,
+    "type": "bearer"
+  },
+  "tools": [
+    {
+      "name": "read_document",
+      "description": "Reads a document from the allowed documents directory and returns its text content.",
+      "parameters": [
+        {
+          "name": "path",
+          "type": "string",
+          "description": "Relative path to the document within the allowed documents directory",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "list_documents",
+      "description": "Lists all available documents in the allowed documents directory.",
+      "parameters": []
+    },
+    {
+      "name": "search_documents",
+      "description": "Searches for documents containing a specific keyword or phrase.",
+      "parameters": [
+        {
+          "name": "searchTerm",
+          "type": "string",
+          "description": "The keyword or phrase to look for across document contents",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "Maximum number of results to return (default: 10)",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "permissions": {
+    "filesystem": {
+      "read": ["/app/documents"],
+      "write": []
+    },
+    "network": {
+      "allowedHosts": ["api.internal.corp"],
+      "allowAllHosts": false
+    },
+    "scopes": ["documents:read"]
+  }
+}

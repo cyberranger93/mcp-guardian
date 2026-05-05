@@ -1,0 +1,45 @@
+{
+  "name": "mcp-guardian",
+  "version": "0.1.0",
+  "description": "MCP server scanner, runtime firewall, and CI guardrail for AI agents",
+  "type": "module",
+  "bin": {
+    "mcp-guardian": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/cli/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "security",
+    "ai-safety",
+    "firewall",
+    "scanner",
+    "llm",
+    "prompt-injection"
+  ],
+  "author": "CyberRanger93",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyberranger93/mcp-guardian.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyberranger93/mcp-guardian/issues"
+  },
+  "homepage": "https://github.com/cyberranger93/mcp-guardian#readme"
+}
