@@ -37,6 +37,52 @@ describe("config and secret scanner", () => {
     ]));
   });
 
+  it("flags common MCP client config shapes and server launch surfaces", () => {
+    const root = mkdtempSync(join(tmpdir(), "mcp-guardian-"));
+    mkdirSync(join(root, ".cursor"));
+    mkdirSync(join(root, ".vscode"));
+
+    writeFileSync(join(root, ".cursor", "mcp.json"), JSON.stringify({
+      mcpServers: {
+        filesystem: {
+          command: "npx",
+          args: ["-y", "@modelcontextprotocol/server-filesystem", "."]
+        }
+      }
+    }));
+    writeFileSync(join(root, ".vscode", "cline_mcp_settings.json"), JSON.stringify({
+      mcpServers: {
+        browser: {
+          command: "docker",
+          args: ["run", "--rm", "--privileged", "example/mcp-browser:latest"]
+        }
+      }
+    }));
+    writeFileSync(join(root, "claude_desktop_config.json"), JSON.stringify({
+      mcpServers: {
+        python: {
+          command: "uvx",
+          args: ["example-mcp-server@latest"],
+          env: {
+            OPENAI_API_KEY: "sk-proj-abcdefghijklmnopqrstuvwxyz"
+          }
+        }
+      }
+    }));
+
+    const summary = scanPath({ root, config: DEFAULT_CONFIG });
+    const supplyChainFiles = summary.findings
+      .filter((finding) => finding.type === "mcp_config.supply_chain_surface")
+      .map((finding) => finding.file);
+
+    expect(supplyChainFiles).toEqual(expect.arrayContaining([
+      ".cursor/mcp.json",
+      ".vscode/cline_mcp_settings.json",
+      "claude_desktop_config.json"
+    ]));
+    expect(summary.findings.map((finding) => finding.type)).toContain("mcp_config.inline_secret");
+  });
+
   it("walks directories while honoring configured excludes", () => {
     const root = mkdtempSync(join(tmpdir(), "mcp-guardian-"));
     writeFileSync(join(root, ".env"), "TOKEN=ghp_abcdefghijklmnopqrstuvwxyz123456");
